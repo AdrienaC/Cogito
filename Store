@@ -1,0 +1,79 @@
+shopping_list = ["banana", "orange", "apple"]
+
+stock = { "banana": 6,
+    "apple": 0,
+    "orange": 32,
+    "pear": 15
+}
+    
+prices = { "banana": 4,
+    "apple": 2,
+    "orange": 1.5,
+    "pear": 3
+}
+
+def compute_bill(food):
+    """Find the cost customer must pay"""
+    tot = 0
+    for item in food:
+        if stock[item] > 0:
+            tot += prices[item]
+            # Updates the inventory of the item
+            stock.update({item:stock[item]-1})
+        else:
+            print "Sorry, our inventory does not contain: " + str(item)
+    return tot
+    print "Your total is $" + str(tot)
+
+def starter():
+    user_input = raw_input("What would you like to do?")
+    user_input.lower()
+    if "check inventory" in user_input:
+        inventory()
+    elif "purchase items" in user_input:
+        shopping_list = raw_input("What would you like to purchase?")
+    elif "view prices" in user_input:
+        view_prices()
+    elif "specific item" in user_input:
+        item_price_one()
+
+def inventory():
+    """Displays our stock information"""
+    print "This is our current inventory"
+    for item in stock:
+        print item + ": " + str(stock[item]) + " in stock"
+    print "----------"
+    starter()
+
+def view_prices():
+    print "Prices:"
+    for item in prices:
+        print item + ": " + str(prices[item])
+    print "-------------"
+    starter()
+
+def item_price_one():
+    item_choices = raw_input("What item(s)? Please separate each item with a space:")
+    return item_choices
+    item_price_two()
+
+def item_price_two():
+    items_to_check_price_of = item_choices.split(" ")
+    for item in items_to_check_price_of:
+        if item in prices:
+             return item + " : $" + str(prices[item])
+        else:
+            print "We do not sell: " + item
+
+def options():
+    print "Here's what you can do"
+    print "Check inventory"
+    print "Purchase items"
+    print "View prices"
+    print "Sell items"
+    print "View price of specific item"
+    print "-------------"
+    starter()
+
+options()
+starter()
